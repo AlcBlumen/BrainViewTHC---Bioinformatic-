@@ -13,8 +13,7 @@ library(ggplot2)
 Simulação de Dados
 Os dados são simulados para representar a concentração de THC e a ativação dos receptores CB1 e CB2 em diferentes regiões do cérebro. Os dados também incluem um valor que indica o efeito neurológico observado. Para garantir a reprodutibilidade, a função set.seed() é usada para gerar os mesmos números aleatórios em cada execução.
 
-r
-Copiar código
+
 set.seed(123)  # Para reprodutibilidade
 regioes <- c("Córtex Pré-frontal", "Hipocampo", "Amígdala", "Cerebelo", "Núcleo Accumbens")
 Um conjunto de dados é criado usando a função data.frame(), onde:
@@ -23,8 +22,7 @@ Concentração_THC: Um valor aleatório entre 1 e 10 ng/mg.
 Ativacao_CB1: Simula a ativação dos receptores CB1 usando uma distribuição normal com média de 0.5 e desvio padrão de 0.1.
 Ativacao_CB2: Simula a ativação dos receptores CB2 com uma distribuição normal, média de 0.3 e desvio padrão de 0.1.
 Efeito_Observado: Um valor aleatório entre 0 e 1 representando o efeito neurológico.
-r
-Copiar código
+
 dados <- data.frame(
   Regiao = rep(regioes, each = 10),
   Concentração_THC = runif(50, min = 1, max = 10),  # Concentração de THC em ng/mg
@@ -38,8 +36,7 @@ head(dados)
 Resumo Estatístico por Região do Cérebro
 Usamos o pacote dplyr para agrupar os dados por região do cérebro e calcular médias das variáveis Concentração_THC, Ativacao_CB1, Ativacao_CB2 e Efeito_Observado.
 
-r
-Copiar código
+
 resumo_estatistico <- dados %>%
   group_by(Regiao) %>%
   summarize(
@@ -54,8 +51,7 @@ print(resumo_estatistico)
 Visualização Gráfica
 Por fim, utilizamos o pacote ggplot2 para criar um gráfico de dispersão que mostra a relação entre a Concentração de THC e a Ativação dos Receptores CB1. O tamanho dos pontos indica a Ativação dos Receptores CB2, e as cores indicam as diferentes regiões do cérebro.
 
-r
-Copiar código
+
 ggplot(data = dados, aes(x = Concentração_THC, y = Ativacao_CB1, color = Regiao, size = Ativacao_CB2)) +
   geom_point(alpha = 0.7) +
   labs(
